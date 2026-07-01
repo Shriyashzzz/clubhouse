@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="/signup" , method="post">
+      <input type="text" placeholder="first name" name="fname" />
+      <input type="text" placeholder="last name" name="lname" />
+      <input type="email" placeholder="Email" , name="email" />
+      <input type="text" placeholder="username" name="username" />
+      <input type="password" placeholder="password" name="password" />
+      <input type="password" placeholder="Confirm Password" name="cpassword" />
+      <input type="text" placeholder="secret code" name="secret" />(optional)
+      <button type="submit">Sign up</button>
+      <ul>
+        <% if (locals.errors) { %>
+            <% errors.map((error)=>{%>
+                <li><%= error.msg %></li>
+          <%  }) %>
+        <% } %>
+      </ul>
+
+    </form>
+  </body>
+</html>
