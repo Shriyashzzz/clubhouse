@@ -18,7 +18,7 @@ const pgSession = connectPgSimple(session);
 app.use(express.urlencoded({ extended: true }));
 app.set("views", path.join(import.meta.dirname, "views"));
 app.set("view engine", "ejs");
-
+app.set("trust proxy", 1);
 //*----------------------------------for passport local strategy------------------------------------------------*
 app.use(
   session({
@@ -30,6 +30,7 @@ app.use(
     }),
     cookie: {
       maxAge: 1000 * 60 * 60,
+      secure: process.env.ENV == "PROD" ? true : false,
     },
   }),
 );
