@@ -4,24 +4,17 @@ import bcrypt from "bcryptjs";
 import { pool } from "./pool.js";
 const emptyError = `cannot be empty!`;
 
-//add minimum/maximum length erro rmessage
 const validationMiddleware = [
-  body("fname")
-    .trim()
-    .notEmpty()
-    .withMessage(`First Name ${emptyError}`)
-    .isLength({ min: 2, max: 0 }),
+  body("fname").trim().notEmpty().withMessage(`First Name ${emptyError}`),
 
-  body("lname")
-    .trim()
-    .notEmpty()
-    .withMessage(`Last Name ${emptyError}`)
-    .isLength({ min: 2, max: 0 }),
+  body("lname").trim().notEmpty().withMessage(`Last Name ${emptyError}`),
+
   body("username")
     .trim()
     .notEmpty()
     .withMessage(` Username ${emptyError}`)
-    .isLength({ min: 2, max: 0 }),
+    .isLength({ min: 5 })
+    .withMessage("Username has to be atleast 5 charachthers long "),
   body("password")
     .trim()
     .notEmpty()
@@ -52,12 +45,13 @@ const postSignUpPage = [
       if (secret == process.env.SECRET_CODE) {
         userStatus = "VIP";
       }
+      const hashedPassword = bcrypt.hash(password, 12);
       const userId = await queries.signUpNewUser(
         fname,
         lname,
         email,
         username,
-        password,
+        hashedPassword,
         userStatus,
       );
       res.render("signup.ejs", { errors: [] });
