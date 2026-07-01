@@ -16,7 +16,7 @@ export const checkIfUserExists = new LocalStrategy(
       const user = rows[0];
 
       if (user) {
-        const isValid = bcrypt.compare(password, user.password);
+        const isValid = await bcrypt.compare(password, user.password);
         if (isValid) {
           return done(null, user);
         } else {
@@ -33,14 +33,14 @@ export const checkIfUserExists = new LocalStrategy(
 
 //defines what to store as a session if the the authenticator finds the login valid
 export const serializer = (user, done) => {
-  done(null, user.id);
+  return done(null, user.id);
 };
 
 //runs on every server requsest to validate the session id of the user
 
 export const getThatUser = async (id, done) => {
   try {
-    const { rows } = pool.query(
+    const { rows } = await pool.query(
       `
             SELECT * FROM users 
             WHERE id = $1
@@ -48,8 +48,20 @@ export const getThatUser = async (id, done) => {
       [id],
     );
     const user = rows[0];
-    done(null, user);
+    if (!user) {
+      return done(null, false);
+    }
+    return done(null, user);
   } catch (err) {
-    done(err);
+    return done(err);
   }
+};
+
+export const handleLogOut = (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/login");
+  });
 };

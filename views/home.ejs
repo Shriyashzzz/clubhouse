@@ -7,5 +7,9 @@
   </head>
   <body>
     hi welcome to the home page
+    <% if (locals.user) { %>
+          Hi <%= user.username  %>
+    <% } %>
+    <a href="/logout">Log Out </a>
   </body>
 </html>
