@@ -1,5 +1,5 @@
 import { pool } from "../models/pool.js";
-
+import bcrypt from "bcryptjs";
 const signUpNewUser = async (
   fname,
   lname,

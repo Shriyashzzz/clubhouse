@@ -1,7 +1,8 @@
 import { validationResult, body, matchedData } from "express-validator";
 import queries from "../public/queries.js";
 import bcrypt from "bcryptjs";
-import { pool } from "./pool.js";
+import { pool } from "../models/pool.js";
+import { hash } from "node:crypto";
 const emptyError = `cannot be empty!`;
 
 const validationMiddleware = [
@@ -15,12 +16,11 @@ const validationMiddleware = [
     .withMessage(` Username ${emptyError}`)
     .isLength({ min: 5 })
     .withMessage("Username has to be atleast 5 charachthers long "),
-  body("password")
-    .trim()
-    .notEmpty()
-    .withMessage(`Password field ${emptyError}`),
+  body("email")
+    .isEmail()
+    .withMessage("Make sure the email is valid. EX: xyz@email.com"),
+  body("password").notEmpty().withMessage(`Password field ${emptyError}`),
   body("cpassword")
-    .trim()
     .notEmpty()
     .withMessage(`Confirm password field ${emptyError}`)
     .custom((value, { req }) => {
@@ -28,6 +28,8 @@ const validationMiddleware = [
       if (!isEqual) {
         throw new Error("Please make sure your passwords match");
       }
+      //returning true tells the custom validator that it's valid
+      return true;
     }),
 ];
 const getSignUpPage = (req, res) => {
@@ -41,11 +43,13 @@ const postSignUpPage = [
     if (errors.isEmpty()) {
       const { fname, lname, email, username, password, secret } =
         matchedData(req);
+
       const userStatus = "MEMBER";
       if (secret == process.env.SECRET_CODE) {
         userStatus = "VIP";
       }
-      const hashedPassword = bcrypt.hash(password, 12);
+      const hashedPassword = await bcrypt.hash(password, 12);
+
       const userId = await queries.signUpNewUser(
         fname,
         lname,

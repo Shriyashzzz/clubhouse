@@ -1,4 +1,4 @@
-import * as signUpController from "../models/signUpController.js";
+import * as signUpController from "../controllers/signUpController.js";
 import { Router } from "express";
 
 export const signUpRouter = Router();
