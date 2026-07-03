@@ -1,5 +1,5 @@
 import { validationResult, matchedData, body } from "express-validator";
-import { makeMemberVip } from "../public/queries.js";
+import { makeMemberVip } from "../models/queries.js";
 
 const validationMiddleware = [
   body("secret")

@@ -1,0 +1,22 @@
+ <header class = "header">
+    <h2>Clubhouse</h2>
+    <div class = "profileStatus">
+        <% if (locals.user) { %> 
+        <p> Hi <%= user.username%></p>
+         <div class = "status" >
+            Status: <%= locals.user.status %>
+            <% if (locals.user && locals.user.status === "MEMBER") { %>
+                <a href="/join-vip">Be a VIP!</a>
+            <% } %>
+            <a href="/logout">Log Out </a>
+         </div>
+        <% }else{ %>
+            <div>
+                Status: Guest
+                <a href = "/login">Log In</a>
+            </div>      
+        <%} %>
+    </div>
+      
+    
+</header>

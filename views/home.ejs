@@ -3,18 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Message App</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
   <body>
-    hi welcome to the home page
-    <% if (locals.user) { %>
-          Hi <%= user.username  %>
-          Status: <%= locals.user.status %>
-    <% } %>
-    <a href="/logout">Log Out </a>
-    <% if (locals.user.status === "MEMBER") { %>
-      <a href="/join-vip">Be a VIP!</a>
-    <% } %>
-    <a href="/join-vip"></a>
+    <%- include('header') %>
   </body>
 </html>

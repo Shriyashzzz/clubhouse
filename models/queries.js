@@ -1,4 +1,4 @@
-import { pool } from "../models/pool.js";
+import { pool } from "./pool.js";
 import bcrypt from "bcryptjs";
 const signUpNewUser = async (
   fname,
@@ -33,4 +33,20 @@ const makeMemberVip = async (id) => {
     throw new Error(e);
   }
 };
-export { signUpNewUser, makeMemberVip };
+
+const getMessages = async () => {
+  try {
+    const messages = await pool.query(
+      `
+    SELECT users.id, users.username, users.email, users.status , messages.*
+    FROM users
+    JOIN messages
+    ON users.id = messages.user_id;
+      `,
+    );
+    return messages.rows;
+  } catch (e) {
+    throw new Error(e);
+  }
+};
+export { signUpNewUser, makeMemberVip, getMessages };

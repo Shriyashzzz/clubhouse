@@ -11,13 +11,17 @@ import {
   handleLogOut,
   serializer,
 } from "./session/authenticateUser.js";
+
 import { check } from "express-validator";
 import { pool } from "./models/pool.js";
 import { joinVipRouter } from "./routes/joinVipRouter.js";
+import { homeRouter } from "./routes/homeRouter.js";
+
 export const app = express();
 const pgSession = connectPgSimple(session);
 app.use(express.urlencoded({ extended: true }));
 app.set("views", path.join(import.meta.dirname, "views"));
+app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.set("trust proxy", 1);
 //*----------------------------------for passport local strategy------------------------------------------------*
@@ -46,13 +50,7 @@ passport.serializeUser(serializer);
 // EX: serialze user saves user.id, now use that user.id to query and get the whole user object
 passport.deserializeUser(getThatUser);
 //*--------------------------------------------------------------------------------------------------------------------*
-app.get("/", (req, res) => {
-  if (req.isAuthenticated()) {
-    res.render("home.ejs", { user: req.user });
-  } else {
-    res.render("login.ejs");
-  }
-});
+app.get("/", homeRouter);
 app.use("/signup", signUpRouter);
 app.use("/login", handleLogInRouter);
 app.get("/logout", handleLogOut);
