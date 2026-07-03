@@ -59,7 +59,7 @@ app.use("/join-vip", joinVipRouter);
 
 app.use("/", (err, req, res, next) => {
   console.error(err);
-  res.render("Error: Invalid action ");
+  res.send("Error: Your server is on fire :/ ");
 });
 app.listen(process.env.PORT, () => {
   console.log(`This app is running on https://localhost:${process.env.PORT}`);

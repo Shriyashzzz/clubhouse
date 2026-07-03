@@ -19,6 +19,7 @@ const filterMessages = async (req, res) => {
 };
 
 const getHomePage = async (req, res) => {
+  console.log(await filterMessages(req, res));
   if (req.isAuthenticated()) {
     res.render("home.ejs", {
       user: req.user,

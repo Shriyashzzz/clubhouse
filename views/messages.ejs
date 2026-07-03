@@ -1,0 +1,16 @@
+<section class="messageContainer">
+    <% locals.messages.forEach(message => { %>
+        <article>
+            <div class = 'authorInfo'>
+                <%= message.username %> 
+                <%= message.status %>
+                <%= message.date %>
+            </div>
+            <div class="messageBox">
+                <%= message.messages %>
+            </div>
+        </article>
+        
+    <% }); %>
+ 
+</section>
