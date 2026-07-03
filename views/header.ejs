@@ -2,7 +2,7 @@
     <h2>Clubhouse</h2>
     <div class = "profileStatus">
         <% if (locals.user) { %> 
-        <p> Hi <%= user.username%></p>
+        <p> Hi <%= _.capitalize(user.username)%></p>
          <div class = "status" >
             Status: <%= locals.user.status %>
             <% if (locals.user && locals.user.status === "MEMBER") { %>

@@ -5,6 +5,7 @@ import { signUpRouter } from "./routes/handleSignUpRouter.js";
 import { handleLogInRouter } from "./routes/handleLogInRouter.js";
 import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
+import _ from "lodash";
 import {
   checkIfUserExists,
   getThatUser,
@@ -24,6 +25,7 @@ app.set("views", path.join(import.meta.dirname, "views"));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.set("trust proxy", 1);
+app.locals._ = _;
 //*----------------------------------for passport local strategy------------------------------------------------*
 app.use(
   session({

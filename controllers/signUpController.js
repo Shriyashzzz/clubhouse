@@ -3,7 +3,6 @@ import * as queries from "../models/queries.js";
 import bcrypt from "bcryptjs";
 import { pool } from "../models/pool.js";
 import { hash } from "node:crypto";
-import capitalize from "lodash";
 const emptyError = `cannot be empty!`;
 
 const validationMiddleware = [
@@ -55,11 +54,11 @@ const postSignUpPage = [
         fname,
         lname,
         email,
-        capitalize(username),
+        username,
         hashedPassword,
         userStatus,
       );
-      res.redirect("/");
+      res.redirect("/login");
       return;
     } else {
       console.log(errors);

@@ -2,7 +2,11 @@ import * as queries from "../models/queries.js";
 
 const filterMessages = async (req, res) => {
   const messages = await queries.getMessages();
-  if (!req.isAuthenticated()) {
+  //if user is vip let them see the message with author info
+  if (req.isAuthenticated() && req.user.status === "VIP") {
+    return messages;
+  } else {
+    //if user is a guest or just a regular member, messages only contain the hidden messages
     const filterdMsg = messages.map((msg) => {
       return {
         ...msg,
@@ -13,8 +17,6 @@ const filterMessages = async (req, res) => {
       };
     });
     return filterdMsg;
-  } else if (req.isAuthenticated()) {
-    return messages;
   }
 };
 
