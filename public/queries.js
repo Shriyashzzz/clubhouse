@@ -18,4 +18,19 @@ const signUpNewUser = async (
   );
   return user.rows[0].id;
 };
-export default { signUpNewUser };
+
+const makeMemberVip = async (id) => {
+  try {
+    await pool.query(
+      `
+        UPDATE users 
+        SET status = 'VIP'  
+        WHERE id = $1
+        `,
+      [id],
+    );
+  } catch (e) {
+    throw new Error(e);
+  }
+};
+export { signUpNewUser, makeMemberVip };

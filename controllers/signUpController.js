@@ -1,5 +1,5 @@
 import { validationResult, body, matchedData } from "express-validator";
-import queries from "../public/queries.js";
+import * as queries from "../public/queries.js";
 import bcrypt from "bcryptjs";
 import { pool } from "../models/pool.js";
 import { hash } from "node:crypto";

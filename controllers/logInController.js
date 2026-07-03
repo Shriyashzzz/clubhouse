@@ -1,4 +1,4 @@
-import queries from "../public/queries.js";
+import * as queries from "../public/queries.js";
 import { validationResult, body, matchedData } from "express-validator";
 const getLoginPage = (req, res) => {
   res.render("login.ejs");

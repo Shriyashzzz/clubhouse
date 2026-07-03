@@ -9,7 +9,12 @@
     hi welcome to the home page
     <% if (locals.user) { %>
           Hi <%= user.username  %>
+          Status: <%= locals.user.status %>
     <% } %>
     <a href="/logout">Log Out </a>
+    <% if (locals.user.status === "MEMBER") { %>
+      <a href="/join-vip">Be a VIP!</a>
+    <% } %>
+    <a href="/join-vip"></a>
   </body>
 </html>

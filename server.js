@@ -13,6 +13,7 @@ import {
 } from "./session/authenticateUser.js";
 import { check } from "express-validator";
 import { pool } from "./models/pool.js";
+import { joinVipRouter } from "./routes/joinVipRouter.js";
 export const app = express();
 const pgSession = connectPgSimple(session);
 app.use(express.urlencoded({ extended: true }));
@@ -54,9 +55,14 @@ app.get("/", (req, res) => {
 });
 app.use("/signup", signUpRouter);
 app.use("/login", handleLogInRouter);
-//controller in authenticateUser.js
 app.get("/logout", handleLogOut);
+//controller in authenticateUser.js
+app.use("/join-vip", joinVipRouter);
 
+app.use("/", (err, req, res, next) => {
+  console.error(err);
+  res.render("Error: Invalid action ");
+});
 app.listen(process.env.PORT, () => {
   console.log(`This app is running on https://localhost:${process.env.PORT}`);
 });
