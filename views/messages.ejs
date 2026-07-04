@@ -1,13 +1,16 @@
 <section class="messageContainer">
     <% locals.messages.forEach(message => { %>
-        <article>
+        <article class = "msg">
             <div class = 'authorInfo'>
-                <%= message.username %> 
+                <%= _.capitalize(message.username) %> 
                 <%= message.status %>
-                <%= message.date %>
+                <% if (locals?.user?.status == "VIP" || locals?.user?.status == "ADMIN") { %>
+                    <%= message.date %>
+                <% } %>
+        
             </div>
             <div class="messageBox">
-                <%= message.message %>
+               => <%= message.message %>
             </div>
         </article>
         
