@@ -1,0 +1,27 @@
+<form action="/addNewMsg" method="post">
+  <div class="messageBoxContainer">
+    <input
+      type="text"
+      placeholder="Type your message here..."
+      name="userMessage"
+      class="messageInput"
+    />
+    <button id="sendButton" type="submit">Send</button>
+  </div>
+</form>
+
+<script>
+  let inputBox = document.querySelector(".messageInput");
+  let sendButton = document.querySelector("#sendButton");
+  console.log(JSON.stringify("<%= locals.user.status %>"));
+  if (
+    "<%= locals.user.status %>" === "VIP" ||
+    "<%= locals.user.status %>" === "ADMIN"
+  ) {
+    inputBox.disabled = false;
+    sendButton.disabled = false;
+  } else {
+    inputBox.disabled = true;
+    sendButton.disabled = true;
+  }
+</script>

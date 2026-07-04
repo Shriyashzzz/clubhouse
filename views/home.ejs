@@ -7,8 +7,11 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
   <body>
-    <%- include('header') %>
-    <main><%- include('messages') %></main>
+    <%- include('./partials/header.ejs') %>
+    <main>
+      <%- include('./partials/messages.ejs') %> <%-
+      include('./partials/addNewMessage.ejs') %>
+    </main>
   </body>
   <footer></footer>
 </html>
