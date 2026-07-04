@@ -3,13 +3,19 @@
     <div class = "profileStatus">
         <% if (locals.user) { %> 
         <p> Hi <%= _.capitalize(user.username)%> |</p>
-         <div class = "status" >
-             <%= locals.user.status %> |
+         <a href="/logout"> Log Out </a>
+         <div class = "statusBox" >
+            <span style="display: flex; justify-content: center; align-items: center; gap:4px">
+                <p class = "memStatus"><%=locals.user.status%></p>
+                <% if (locals.user.status =="MEMBER") { %>
+                ▼
+                <% } %>
+            </span>
             <% if (locals.user && locals.user.status === "MEMBER") { %>
-                <a href="/join-vip">Be a VIP! |</a>
-            <% } %>
-            <a href="/logout"> Log Out </a>
+                <a class = " invisibleBox" href="/join-vip"> Be a VIP! </a>
+            <% } %>          
          </div>
+        
         <% }else{ %>
             <div>
                 Status: Guest
@@ -20,3 +26,14 @@
       
     
 </header>
+
+<script>
+    let statusBox = document.querySelector(".memStatus");
+    let memStatus = document.querySelector(".memStatus");
+    let invisble = document.querySelector(".invisibleBox");
+    if(memStatus && memStatus.textContent.trim() == "MEMBER"){
+        statusBox.addEventListener("click", ()=>{
+        invisble.classList.toggle("showDropDown")
+        })
+    }
+</script>

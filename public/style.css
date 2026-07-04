@@ -18,8 +18,8 @@ body {
 @font-face {
   font-family: "Rampart One";
   src:
-    url("./fonts/PressStart2P-Regular.woff2") format("woff2"),
-    url("./fonts/PressStart2P-Regular.woff") format("woff");
+    url("./fonts/RampartOne-Regular.woff2") format("woff2"),
+    url("./fonts/RampartOne-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -51,12 +51,25 @@ body {
   background-color: var(--darkBg);
 }
 
-.status {
+.statusBox {
+  border: 1px solid black;
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
+  flex-direction: column;
+  position: relative;
+  cursor: pointer;
+
+  span {
+    padding: 0.5rem;
+  }
+  span:hover {
+    background-color: grey;
+    color: white;
+  }
 }
 
 main {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -84,5 +97,31 @@ main {
   }
 
   .messageBox {
+    line-height: 2rem;
   }
+}
+
+.invisibleBox {
+  position: absolute;
+  top: 110%;
+  padding: 0.5rem;
+  text-align: center;
+  display: none;
+  opacity: 0;
+  left: 50%;
+  background-color: grey;
+  color: white;
+  width: max-content;
+  transform: translateX(-50%);
+  font-size: var(--font-size-med);
+  line-height: 20px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  &:hover {
+    color: black;
+  }
+}
+
+.showDropDown {
+  display: block;
+  opacity: 1;
 }
