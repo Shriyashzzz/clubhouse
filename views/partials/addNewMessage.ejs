@@ -16,13 +16,14 @@
   let sendButton = document.querySelector("#sendButton");
   if (
     "<%= locals?.user?.status %>" === "VIP" ||
-    "<%= locals?.user?.status %>" === "ADMIN"
+    "<%= locals?.user?.status %>" === "ADMIN" ||
+    "<%= locals?.user?.status %>" === "MEMBER"
   ) {
     inputBox.disabled = false;
     sendButton.disabled = false;
   } else {
     inputBox.disabled = true;
-    inputBox.placeholder = "Sign up to send Messages !";
+    inputBox.placeholder = "Log In to send Messages !";
     sendButton.disabled = true;
   }
 </script>
