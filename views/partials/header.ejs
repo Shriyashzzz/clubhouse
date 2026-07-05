@@ -2,8 +2,8 @@
     <h2>Clubhouse</h2>
     <div class = "profileStatus">
         <% if (locals.user) { %> 
-        <p> Hi <%= _.capitalize(user.username)%> |</p>
-         <a href="/logout"> Log Out </a>
+        <p class = 'headerUsername'> Hi <%= _.capitalize(user.username)%> |</p>
+        
          <div class = "statusBox" >
             <span style="display: flex; justify-content: center; align-items: center; gap:4px">
                 <p class = "memStatus"><%=locals.user.status%></p>
@@ -15,7 +15,7 @@
                 <a class = " invisibleBox" href="/join-vip"> Be a VIP! </a>
             <% } %>          
          </div>
-        
+         <a  class = "logoutAnchor" href="/logout"> Log Out </a>
         <% }else{ %>
             <div>
                 Status: Guest
@@ -30,10 +30,16 @@
 <script>
     let statusBox = document.querySelector(".memStatus");
     let memStatus = document.querySelector(".memStatus");
-    let invisble = document.querySelector(".invisibleBox");
+    let invisible = document.querySelector(".invisibleBox");
     if(memStatus && memStatus.textContent.trim() == "MEMBER"){
         statusBox.addEventListener("click", ()=>{
-        invisble.classList.toggle("showDropDown")
+        invisible.classList.toggle("showDropDown")
         })
     }
+    window.addEventListener('click',(e)=>{
+        // if the 'MEMBER' button is clicked it does not remove the 'showDropDown' classlist
+        if(invisible.classList.contains("showDropDown") && e.target !== memStatus ){
+            invisible.classList.remove("showDropDown");
+        }
+    })
 </script>
