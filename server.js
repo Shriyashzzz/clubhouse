@@ -17,16 +17,10 @@ import { check } from "express-validator";
 import { pool } from "./models/pool.js";
 import { joinVipRouter } from "./routes/joinVipRouter.js";
 import { homeRouter } from "./routes/homeRouter.js";
-
+import { sendMessageRouter } from "./routes/sendMessageRouter.js";
 export const app = express();
+
 const pgSession = connectPgSimple(session);
-app.use(express.urlencoded({ extended: true }));
-app.set("views", path.join(import.meta.dirname, "views"));
-app.use(express.static("public"));
-app.set("view engine", "ejs");
-app.set("trust proxy", 1);
-app.locals._ = _;
-//*----------------------------------for passport local strategy------------------------------------------------*
 app.use(
   session({
     secret: process.env.COOKIE_SECRET,
@@ -41,6 +35,14 @@ app.use(
     },
   }),
 );
+app.use(express.urlencoded({ extended: true }));
+app.set("views", path.join(import.meta.dirname, "views"));
+app.use(express.static("public"));
+app.set("view engine", "ejs");
+app.set("trust proxy", 1);
+app.locals._ = _;
+//*----------------------------------for passport local strategy------------------------------------------------*
+
 //"installs" passport into Express's request/response cycle.
 app.use(passport.initialize());
 app.use(passport.session());
@@ -58,7 +60,7 @@ app.use("/login", handleLogInRouter);
 app.get("/logout", handleLogOut);
 //controller in authenticateUser.js
 app.use("/join-vip", joinVipRouter);
-
+app.use("/sendMessage", sendMessageRouter);
 app.use("/", (err, req, res, next) => {
   console.error(err);
   res.send("Error: Your server is on fire :/ ");

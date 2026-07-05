@@ -49,4 +49,18 @@ const getMessages = async () => {
     throw new Error(e);
   }
 };
-export { signUpNewUser, makeMemberVip, getMessages };
+const addNewMessage = async (userId, message, date) => {
+  try {
+    await pool.query(
+      `
+      INSERT INTO messages (user_id, message, date)
+      VALUES ($1, $2, $3);
+      `,
+      [userId, message, date],
+    );
+  } catch (e) {
+    throw new Error(e);
+  }
+};
+
+export { signUpNewUser, makeMemberVip, getMessages, addNewMessage };
