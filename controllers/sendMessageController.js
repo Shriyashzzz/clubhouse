@@ -24,7 +24,7 @@ export const sendMessageController = [
           next(e);
         }
       } else {
-        res.redirect("/", { error: errors.array() });
+        res.red("/");
       }
     } else {
       next(

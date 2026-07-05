@@ -50,6 +50,12 @@ main {
   height: 100dvh;
 }
 /* ---------- header(partial)------------------- */
+
+.appName {
+  text-decoration: none;
+  color: inherit;
+}
+
 .profileStatus {
   display: flex;
   justify-content: center;
