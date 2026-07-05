@@ -13,10 +13,9 @@
 <script>
   let inputBox = document.querySelector(".messageInput");
   let sendButton = document.querySelector("#sendButton");
-  console.log(JSON.stringify("<%= locals.user.status %>"));
   if (
-    "<%= locals.user.status %>" === "VIP" ||
-    "<%= locals.user.status %>" === "ADMIN"
+    "<%= locals?.user?.status %>" === "VIP" ||
+    "<%= locals?.user?.status %>" === "ADMIN"
   ) {
     inputBox.disabled = false;
     sendButton.disabled = false;
