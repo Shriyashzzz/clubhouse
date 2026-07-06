@@ -6,4 +6,4 @@ Likewise, I as an admin can delete any mesages I want. hahaahah, powerr moves ri
 
 ![Application Preview.](./public/preview.png "Preview")
 
-This is an SSR applicartion made using PostgreSQL for data storage, express-validator for validating user input, express-session for session management, and passport for authentication and pg-connect-simple for session storage.
+This is an SSR applicartion made using EJS for html template, PostgreSQL for data storage, express-validator for validating user input, express-session for session management, and passport for authentication and pg-connect-simple for session storage.
