@@ -1,4 +1,7 @@
 <section class="messageContainer">
+    <% if (locals?.messages?.length == 0) { %>
+        <h3>Be the first one to write a message!</h3>
+    <% } %>
     <% locals?.messages?.forEach(message => { %>
         <article class = "msg">
             <div class = 'authorInfo'>
@@ -23,7 +26,7 @@
 </section>
 
 <script>
-    let deleteMsgBtn = document.querySelectorAll(".deleteMsg").forEach(
+    let deleteMsgBtn = document.querySelectorAll(".deleteMsgBtn").forEach(
         (btn)=>{
             
             btn.addEventListener('click', (e)=>{
