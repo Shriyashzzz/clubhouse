@@ -38,13 +38,17 @@ body {
 /* all auth pages, login/ signup/ joinVip */
 
 .authContainer {
+  font-size: var(--font-size-med);
   display: flex;
-  height: 600px;
+  height: 650px;
   width: 400px;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   background-color: aliceblue;
+  a {
+    text-decoration: none;
+  }
   form {
     display: flex;
 
