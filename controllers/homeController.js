@@ -13,13 +13,16 @@ const filterMessages = async (req, res) => {
     const filterdMsg = await Promise.all(
       messages.map(async (msg) => {
         if ((await queries.getUserStatus(msg.user_id)) === "ADMIN") {
+          //if the message is sent by the admin, don't hide the name and the date(only for guests and reg members)
           return {
             ...msg,
             email: "****@email.com",
             user_id: 0,
           };
         } else {
+          //i
           return {
+            //if the message is not sent by the admin,hide the name and the date(only for guests and reg members)
             ...msg,
             username: "****",
             email: "****@email.com",
