@@ -1,4 +1,4 @@
-import express from "express";
+import express, { application } from "express";
 import path from "node:path";
 import passport from "passport";
 import { signUpRouter } from "./routes/handleSignUpRouter.js";
@@ -18,6 +18,7 @@ import { pool } from "./models/pool.js";
 import { joinVipRouter } from "./routes/joinVipRouter.js";
 import { homeRouter } from "./routes/homeRouter.js";
 import { sendMessageRouter } from "./routes/sendMessageRouter.js";
+import { messageRouter } from "./routes/messageRouter.js";
 export const app = express();
 
 const pgSession = connectPgSimple(session);
@@ -65,6 +66,8 @@ app.use("/", (err, req, res, next) => {
   console.error(err);
   res.send("Error: Your server is on fire :/ ");
 });
+app.use("/message", messageRouter);
+
 app.listen(process.env.PORT, () => {
   console.log(`This app is running on https://localhost:${process.env.PORT}`);
 });

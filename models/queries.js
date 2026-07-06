@@ -1,3 +1,4 @@
+import { query } from "express-validator";
 import { pool } from "./pool.js";
 import bcrypt from "bcryptjs";
 const signUpNewUser = async (
@@ -63,4 +64,42 @@ const addNewMessage = async (userId, message, date) => {
   }
 };
 
-export { signUpNewUser, makeMemberVip, getMessages, addNewMessage };
+const deleteThatMessage = async (messageId) => {
+  try {
+    await pool.query(
+      `
+    DELETE FROM messages
+    WHERE id = $1
+    
+    
+    
+    `,
+      [messageId],
+    );
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
+const getUserStatus = async (userId) => {
+  const response = await pool.query(
+    `
+    SELECT status FROM users 
+    WHERE id = $1
+    
+    `,
+    [userId],
+  );
+
+  return response.rows[0].status;
+};
+
+export {
+  signUpNewUser,
+  makeMemberVip,
+  getMessages,
+  addNewMessage,
+  deleteThatMessage,
+  getUserStatus,
+};

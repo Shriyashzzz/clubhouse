@@ -3,19 +3,33 @@ import * as queries from "../models/queries.js";
 const filterMessages = async (req, res) => {
   const messages = await queries.getMessages();
   //if user is vip let them see the message with author info
-  if (req.isAuthenticated() && req.user.status === "VIP") {
+  if (
+    req.isAuthenticated() &&
+    (req.user.status === "VIP" || req.user.status == "ADMIN")
+  ) {
     return messages;
   } else {
     //if user is a guest or just a regular member, messages only contain the hidden messages
-    const filterdMsg = messages.map((msg) => {
-      return {
-        ...msg,
-        username: "****",
-        email: "****@email.com",
-        date: "xx-yy-zz",
-        user_id: 0,
-      };
-    });
+    const filterdMsg = await Promise.all(
+      messages.map(async (msg) => {
+        if ((await queries.getUserStatus(msg.user_id)) === "ADMIN") {
+          return {
+            ...msg,
+            email: "****@email.com",
+            user_id: 0,
+          };
+        } else {
+          return {
+            ...msg,
+            username: "****",
+            email: "****@email.com",
+            date: "xx-yy-zz",
+            user_id: 0,
+          };
+        }
+      }),
+    );
+    s;
     return filterdMsg;
   }
 };

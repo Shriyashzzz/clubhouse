@@ -139,6 +139,10 @@ main {
   .messageBox {
     line-height: 2rem;
   }
+
+  .deleteMsgBtn {
+    padding: 3px;
+  }
 }
 /* ---------------- addNewMessage -------------------- */
 

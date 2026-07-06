@@ -7,7 +7,11 @@
                 <% if (locals?.user?.status == "VIP" || locals?.user?.status == "ADMIN") { %>
                     <%= message?.date %>
                 <% } %>
-        
+
+                <% if (locals?.user?.status == "ADMIN") { %>
+                    <button class = 'deleteMsg' type = "submit" data-id = "<%=message.id%>">Delete </button>
+                <% } %>
+            
             </div>
             <div class="messageBox">
                => <%= message?.message %>
@@ -17,3 +21,29 @@
     <% }); %>
  
 </section>
+
+<script>
+    let deleteMsgBtn = document.querySelectorAll(".deleteMsg").forEach(
+        (btn)=>{
+            
+            btn.addEventListener('click', (e)=>{
+                const id = e.target.dataset.id;
+                 fetch(`message/${id}`,{
+                    method: 'DELETE'
+                 }).then(
+                    res=> {
+                        if (res.ok){
+                            e.target.closest('.msg').remove();
+                        }
+                    }
+                 ).catch(err => console.lof(err))
+            })
+
+
+        }
+    )
+
+   
+
+
+</script>
