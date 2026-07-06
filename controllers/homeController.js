@@ -20,9 +20,9 @@ const filterMessages = async (req, res) => {
             user_id: 0,
           };
         } else {
-          //i
+          //if the message is not sent by the admin,hide the name and the date(only for guests and reg members)
+
           return {
-            //if the message is not sent by the admin,hide the name and the date(only for guests and reg members)
             ...msg,
             username: "****",
             email: "****@email.com",
@@ -32,7 +32,7 @@ const filterMessages = async (req, res) => {
         }
       }),
     );
-    s;
+
     return filterdMsg;
   }
 };
