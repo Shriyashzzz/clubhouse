@@ -44,7 +44,7 @@ const postSignUpPage = [
       const { fname, lname, email, username, password, secret } =
         matchedData(req);
 
-      const userStatus = "MEMBER";
+      let userStatus = "MEMBER";
       if (secret == process.env.SECRET_CODE) {
         userStatus = "VIP";
       }
