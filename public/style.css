@@ -147,12 +147,10 @@ main {
 
 .guestLogInBox {
   display: flex;
-  font-size: 16px;
   justify-content: center;
   align-items: center;
-  a {
-    font-size: var(--font-size-small);
-  }
+
+  font-size: var(--font-size-small);
 }
 /* ---------------- addNewMessage -------------------- */
 
@@ -193,6 +191,14 @@ main {
       .headerUsername {
         display: none;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 677px) {
+  .guestLogInBox {
+    p {
+      display: none;
     }
   }
 }
