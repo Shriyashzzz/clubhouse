@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --env-file=.env server.js",
-    "initdb": "node --env-file=.env models/initdb"
+    "startdev": "nodemon --env-file=.env server.js",
+    "initdbdev": "node --env-file=.env models/initdb",
+    "start": "node server.js",
+    "initdb": "node models/initdb"
   },
   "keywords": [],
   "author": "",
