@@ -19,6 +19,9 @@
 
 body {
   font-size: var(--font-size-med);
+  button {
+    cursor: pointer;
+  }
 }
 @font-face {
   font-family: "Rampart One";
@@ -123,7 +126,7 @@ main {
   gap: 2rem;
   border: 2px solid skyblue;
   padding: 1rem;
-  flex: 0.85;
+  flex: 0.8;
   overflow: auto;
   .authorInfo {
     font-size: var(--font-size-small);
@@ -141,7 +144,8 @@ main {
   }
 
   .deleteMsgBtn {
-    padding: 3px;
+    padding: 5px;
+    font-size: 10px;
   }
 }
 
@@ -184,6 +188,7 @@ main {
     justify-content: space-between;
     .profileStatus {
       display: flex;
+      gap: 4px;
       flex-direction: column;
       .logoutAnchor {
         font-family: monospace;
