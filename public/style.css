@@ -73,7 +73,7 @@ main {
   align-items: center;
   padding: 1rem;
   background-color: var(--darkBg);
-  a {
+  .loginAnchor {
     color: purple;
   }
 }
