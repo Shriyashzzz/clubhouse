@@ -61,7 +61,6 @@ const postSignUpPage = [
       res.redirect("/login");
       return;
     } else {
-      console.log(errors);
       res.render("signup.ejs", { errors: errors.array() });
       return;
     }
